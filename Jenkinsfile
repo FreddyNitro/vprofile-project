@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        jdk "JDK17"
+        jdk "JDK21"
         maven "MAVEN3.9"
     }
     
@@ -15,6 +15,7 @@ pipeline {
 		NEXUSPORT = '8081'
 		NEXUS_GRP_REPO = 'vpro-maven-group'
         NEXUS_LOGIN = 'nexuslogin'
+
     }
 
     stages {
