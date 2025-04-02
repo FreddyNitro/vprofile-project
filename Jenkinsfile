@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        jdk "JDK21"
+        jdk "JDK"
         maven "MAVEN3.9"
     }
     
@@ -22,6 +22,22 @@ pipeline {
         stage('Build'){
             steps {
                 sh 'mvn -s settings.xml -DskipTests install'
+            }
+            post {
+                success {
+                    echo "Now Archiving."
+                    archiveArtifacts artifacts: '**/*.war'
+                }
+            }
+        }
+        stage('Test'){
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('chestyle Analysis'){
+            steps {
+                sh 'mvn chectyle:checkstyle'
             }
         }
     }
